@@ -3,11 +3,11 @@ import React from 'react'
 import './App.css'
 import Bookcase from './components/bookcase/Bookcase'
 import BookSearch from './components/booksearch/BookSearch'
+import { Route } from 'react-router-dom'
 
 
 class BooksApp extends React.Component {
   state = {
-
     bookcase: [
       {
         name: 'Currently Reading',
@@ -64,8 +64,6 @@ class BooksApp extends React.Component {
         ]
       }
     ],
-
-    showSearchPage: false
   }
 
   render() {
@@ -74,11 +72,12 @@ class BooksApp extends React.Component {
 
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          <BookSearch />
-        ) : (
-            <Bookcase bookcase={bookcase} />
-          )}
+        <Route exact path='/' render={() => (
+          <Bookcase bookcase={bookcase} />
+        )} />
+
+        <Route path='/search' component={BookSearch} />
+
       </div>
     )
   }
