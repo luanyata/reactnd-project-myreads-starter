@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 
 class Book extends Component {
-
-
-
     render() {
-        const { books } = this.props;
+
+        const { books, shelf } = this.props;
+
+        const catalogedBooks = shelf !== undefined ? books.filter(book => book.shelf === shelf) : books;
 
         return (
-            <div>
-                {(books !== undefined && !books.items) && books.map(book => (
+            <ol className="books-grid">
+                {(catalogedBooks !== undefined && !catalogedBooks.items) && catalogedBooks.map(book => (
                     <li key={book.id}>
                         <div className="book">
                             <div className="book-top">
@@ -30,7 +30,7 @@ class Book extends Component {
                     </li>
                 )
                 )}
-            </div>
+            </ol>
         );
     }
 }

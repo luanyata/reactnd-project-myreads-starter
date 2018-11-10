@@ -43,9 +43,7 @@ class BookSearch extends Component {
                     </div>
                 </div>
                 <div className="search-books-results">
-                    <ol className="books-grid">
-                        <Book books={books} />
-                    </ol>
+                    <Book books={books} />
                 </div>
             </div>
         );
