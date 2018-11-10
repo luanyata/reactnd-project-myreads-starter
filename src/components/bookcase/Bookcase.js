@@ -1,27 +1,17 @@
 import React, { Component } from 'react';
 import Book from '../book/Book';
 import { Link } from 'react-router-dom';
-import * as BooksAPI from '../../BooksAPI';
 
 class Bookcase extends Component {
 
-    state = { books: [] }
-
-    componentDidMount() {
-        BooksAPI.getAll()
-            .then((books) => {
-                this.setState(() => ({ books }));
-            })
-    }
-
     render() {
 
-        const { books } = this.state;
+        const { myBooks, updateState } = this.props;
 
         const bookcase = [
-            { id: 'currentlyReading', name: 'Currently Reading', books },
-            { id: 'wantToRead', name: 'Want to Read', books },
-            { id: 'read', name: 'Read', books }
+            { id: 'currentlyReading', name: 'Currently Reading', myBooks },
+            { id: 'wantToRead', name: 'Want to Read', myBooks },
+            { id: 'read', name: 'Read', myBooks }
         ]
 
         return (
@@ -36,7 +26,7 @@ class Bookcase extends Component {
                                 <div key={bcs.name} className="bookshelf">
                                     <h2 className="bookshelf-title">{bcs.name}</h2>
                                     <div className="bookshelf-books">
-                                        <Book books={bcs.books} shelf={bcs.id} />
+                                        <Book books={bcs.myBooks} shelf={bcs.id} updateState={updateState} />
                                     </div>
                                 </div>
                             ))

@@ -12,10 +12,10 @@ class BookSearch extends Component {
 
     update = (query) => {
         this.updateQuery(query);
-        this.updaetBooks(query);
+        this.updateBooks(query);
     }
 
-    updaetBooks(query) {
+    updateBooks(query) {
         if (query) {
             BooksAPI.search(query)
                 .then((books) => this.setState(() => ({ books })))
@@ -23,8 +23,6 @@ class BookSearch extends Component {
     }
 
     updateQuery = (query) => {
-        console.log(query);
-
         this.setState(() => ({
             query: query.trim()
         }));
@@ -33,6 +31,12 @@ class BookSearch extends Component {
     render() {
 
         const { query, books } = this.state;
+        const { updateState, myBooks } = this.props;
+
+        const joinBooks = books.filter(book => myBooks.map(bookUser => book.shelf = bookUser.id === book.id ? bookUser.shelf : 'none'));
+
+        console.log('Join', joinBooks);
+
 
         return (
             <div className="search-books">
@@ -43,7 +47,7 @@ class BookSearch extends Component {
                     </div>
                 </div>
                 <div className="search-books-results">
-                    <Book books={books} />
+                    <Book books={books} updateState={updateState} />
                 </div>
             </div>
         );
