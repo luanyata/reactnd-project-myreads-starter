@@ -26,16 +26,12 @@ class BooksApp extends React.Component {
       shelf: target.value
     })
 
-    console.log('OLA', books);
-
     this.updateAndSave(books);
   }
 
   updateAndSave = (books) => {
     this.setState(() => ({ books }))
   }
-
-
 
   render() {
 

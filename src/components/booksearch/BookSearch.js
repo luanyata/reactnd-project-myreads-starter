@@ -11,8 +11,10 @@ class BookSearch extends Component {
     }
 
     update = (query) => {
-        this.updateQuery(query);
-        this.updateBooks(query);
+        const queryNoSpace = query.trim();
+
+        this.updateQuery(queryNoSpace);
+        this.updateBooks(queryNoSpace);
     }
 
     updateBooks(query) {
@@ -24,7 +26,7 @@ class BookSearch extends Component {
 
     updateQuery = (query) => {
         this.setState(() => ({
-            query: query.trim()
+            query: query
         }));
     }
 
@@ -33,10 +35,7 @@ class BookSearch extends Component {
         const { query, books } = this.state;
         const { updateState, myBooks } = this.props;
 
-        const joinBooks = books.filter(book => myBooks.map(bookUser => book.shelf = bookUser.id === book.id ? bookUser.shelf : 'none'));
-
-        console.log('Join', joinBooks);
-
+        books.length && books.filter(book => myBooks.map(bookUser => book.shelf = bookUser.id === book.id ? bookUser.shelf : 'none'));
 
         return (
             <div className="search-books">
