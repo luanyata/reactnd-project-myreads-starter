@@ -14,10 +14,9 @@ class BooksApp extends React.Component {
   componentDidMount() {
     BooksAPI.getAll()
       .then((books) => {
-        this.updateAndSave(books)
+        this.updateStateBooks(books)
       })
   }
-
 
   updateState = (target, book) => {
     let { books } = this.state;
@@ -26,11 +25,17 @@ class BooksApp extends React.Component {
       shelf: target.value
     })
 
-    this.updateAndSave(books);
+    this.updateBook(book, target.value)
+      .then(() => this.updateStateBooks(books))
+      .catch(() => alert(`Falha ao salvar as alteração do livro ${book.name}`));
   }
 
-  updateAndSave = (books) => {
-    this.setState(() => ({ books }))
+  updateStateBooks = (books) => {
+    this.setState(() => ({ books }));
+  }
+
+  updateBook = (book, shelf) => {
+    return BooksAPI.update(book, shelf);
   }
 
   render() {
