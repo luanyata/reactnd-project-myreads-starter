@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 
 import './App.css'
 import Bookcase from './components/bookcase/Bookcase'
@@ -7,15 +7,13 @@ import { Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI';
 
 
-class BooksApp extends React.Component {
+class BooksApp extends Component {
 
   state = { books: [] }
 
-  componentDidMount() {
-    BooksAPI.getAll()
-      .then((books) => {
-        this.updateStateBooks(books)
-      })
+  async componentDidMount() {
+    const books = await BooksAPI.getAll()
+    this.updateStateBooks(books)
   }
 
   updateState = (target, book) => {
